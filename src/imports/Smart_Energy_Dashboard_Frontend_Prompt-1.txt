@@ -1,0 +1,80 @@
+SMART ENERGY OPTIMIZATION DASHBOARD – FRONTEND MASTER PROMPT
+
+Design and generate a high-fidelity, fully functional React + TypeScript
+web dashboard for an AI-powered Smart Campus Energy Management System.
+
+The application should look modern, enterprise-level, and suitable for
+university administrators monitoring energy efficiency.
+
+Use a clean layout with Tailwind CSS styling. The UI must feel like a
+professional SaaS analytics platform.
+
+Application Name: Smart Energy Optimization Dashboard
+
+Target Users: - Campus Facility Managers - Energy Auditors -
+Sustainability Officers - University Administration
+
+Overall Layout: - Left vertical navigation sidebar - Top header bar with
+page title and live system status - Main content dashboard area - Light
+mode default with professional color palette (blue, slate, white, green
+for sustainability indicators)
+
+Sidebar Navigation Items: - Dashboard Overview - Energy Forecast -
+Optimization Insights - Sustainability Impact - Reports - Settings
+
+Dashboard Overview Page: KPI Cards (Top Row): - Current Energy Usage
+(kWh) - Predicted Next 24 Hours (kWh) - Peak Load Time - Estimated
+Monthly Savings (₹) - Carbon Emissions Reduced (kg CO₂)
+
+Each card should show: - Large metric number - Percentage
+increase/decrease - Mini sparkline trend
+
+Energy Consumption Chart: - Interactive time-series line chart -
+Historical energy (last 7 days) - Predicted energy overlay (dashed
+line) - Toggle: Hourly/Daily view - Hover tooltip
+
+External Factors Panel: - Temperature (°C) - Humidity (%) - Occupancy
+(%) - Day Type (Weekday/Holiday) - Special Events Flag
+
+Energy Forecast Page: - 24-Hour Forecast Table Columns: Time | Predicted
+Energy (kWh) | Risk Level Risk Level badges: Low (Green), Medium
+(Yellow), High (Red)
+
+-   Forecast Confidence Gauge (0–100%)
+-   Peak Load Alert Card with suggested action
+
+Optimization Insights Page: Recommendation Cards including: -
+Recommendation title - Explanation paragraph - Expected Energy Reduction
+(%) - Estimated Cost Savings (₹) - Implementation Priority
+(High/Medium/Low) - “Apply Strategy” button
+
+Explainable AI Section: - Feature Importance Bar Chart (Top 5 factors) -
+Natural-language AI Explanation Box
+
+Sustainability Impact Page: - Monthly Energy Savings Chart - CO₂
+Emissions Reduction Graph - Annual Savings Projection Card -
+Sustainability Score Badge (0–100)
+
+Reports Page: - Download Report (PDF button) - Select Date Range -
+Export Forecast Data (CSV button)
+
+Settings Page: - Peak Alert Threshold Settings - HVAC Optimization
+Toggle - Occupancy Data Integration Toggle - Notification Preferences
+
+Technical Requirements: - Built using React with TypeScript - Tailwind
+CSS styling - Chart components (Recharts or similar) - Modular component
+structure - Clean folder hierarchy - API-ready architecture with
+placeholders for: /predict /recommendations /insights
+
+Include mock data so the application appears fully functional.
+
+Visual Style: - Clean enterprise SaaS UI - Subtle shadows - Rounded
+cards - Professional typography - Smooth hover transitions - Data-dense
+but minimal design
+
+Responsiveness: - Desktop primary layout - Tablet optimized - Mobile
+with collapsible sidebar
+
+Deliverable: Generate a functional React + TypeScript application with
+multiple pages, interactive charts, dynamic mock data, and
+production-level dashboard experience.
