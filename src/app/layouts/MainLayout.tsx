@@ -1,10 +1,27 @@
 import { Outlet } from 'react-router';
 import { Sidebar } from '../components/Sidebar';
 import { useCampus } from '../context/CampusContext';
-import { Info } from 'lucide-react';
+import { Info, Loader2 } from 'lucide-react';
 
 export function MainLayout() {
-  const { isSimulationMode, isConfigured } = useCampus();
+  const { isSimulationMode, isConfigured, isLoading } = useCampus();
+
+  // Show loading state while initial data loads
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen bg-slate-50">
+        <Sidebar />
+        <main className="flex-1 ml-64">
+          <div className="flex items-center justify-center h-screen">
+            <div className="text-center">
+              <Loader2 className="w-12 h-12 text-blue-600 animate-spin mx-auto mb-4" />
+              <p className="text-slate-600 font-medium">Loading campus data...</p>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-slate-50">

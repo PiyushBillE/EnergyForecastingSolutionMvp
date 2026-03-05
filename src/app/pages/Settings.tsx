@@ -5,8 +5,10 @@ import { Input } from '../components/ui/input';
 import { Switch } from '../components/ui/switch';
 import { Button } from '../components/ui/button';
 import { Slider } from '../components/ui/slider';
-import { Save, Bell, Zap, Users, Settings2 } from 'lucide-react';
+import { Save, Bell, Zap, Users, Settings2, Database, Loader2, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
+import { seedDemoData } from '../utils/seedData';
+import { projectId } from '../../../utils/supabase/info';
 
 export function Settings() {
   const [peakAlertThreshold, setPeakAlertThreshold] = useState(350);
@@ -15,6 +17,8 @@ export function Settings() {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [smsNotifications, setSmsNotifications] = useState(false);
   const [peakAlerts, setPeakAlerts] = useState(true);
+  const [isSeeding, setIsSeeding] = useState(false);
+  const [seedSuccess, setSeedSuccess] = useState(false);
 
   const handleSaveSettings = () => {
     alert('Settings saved successfully!\n\nYour preferences have been updated.');
@@ -248,6 +252,85 @@ export function Settings() {
                 defaultValue="5"
                 className="mt-2"
               />
+            </div>
+          </div>
+        </Card>
+
+        {/* Database Management */}
+        <Card className="p-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+              <Database className="w-5 h-5 text-indigo-600" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-slate-900">Database Management</h3>
+              <p className="text-sm text-slate-600">Supabase backend configuration and demo data</p>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-slate-700">Supabase Project ID</span>
+                <code className="text-xs bg-white px-2 py-1 rounded border border-slate-300">{projectId}</code>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-slate-700">Database URL</span>
+                <code className="text-xs bg-white px-2 py-1 rounded border border-slate-300">
+                  https://{projectId}.supabase.co
+                </code>
+              </div>
+            </div>
+
+            <div className="border-t border-slate-200 pt-4">
+              <h4 className="text-sm font-semibold text-slate-900 mb-2">Demo Data Generator</h4>
+              <p className="text-sm text-slate-600 mb-4">
+                Create a sample campus with 30 days of historical energy data and 48 hours of predictions for testing.
+              </p>
+              <Button
+                onClick={async () => {
+                  if (!confirm('This will create a demo campus with 30 days of sample data. Continue?')) {
+                    return;
+                  }
+                  setIsSeeding(true);
+                  setSeedSuccess(false);
+                  try {
+                    const result = await seedDemoData();
+                    setSeedSuccess(true);
+                    alert(`✅ Demo data created!\\n\\nCampus ID: ${result.campusId}\\nEnergy Records: ${result.energyRecords}\\nPredictions: ${result.predictions}\\n\\nRefresh the page to see the data.`);
+                  } catch (error: any) {
+                    alert(`❌ Error: ${error.message}`);
+                  } finally {
+                    setIsSeeding(false);
+                  }
+                }}
+                disabled={isSeeding}
+                variant="outline"
+                className="w-full"
+              >
+                {isSeeding ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Creating Demo Data...
+                  </>
+                ) : seedSuccess ? (
+                  <>
+                    <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+                    Demo Data Created
+                  </>
+                ) : (
+                  <>
+                    <Database className="w-4 h-4 mr-2" />
+                    Generate Demo Data
+                  </>
+                )}
+              </Button>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <p className="text-sm text-blue-900">
+                ℹ️ All dashboard data is stored in Supabase PostgreSQL. The demo data generator creates realistic energy consumption patterns for testing.
+              </p>
             </div>
           </div>
         </Card>
